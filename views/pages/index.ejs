@@ -1,0 +1,39 @@
+<% layout("layouts/boilerplate.ejs") %>
+
+<section class="container">
+
+    <div class="page-header">
+        <h1>All Campgrounds</h1>
+
+        <a href="/campground/new" class="btn">
+            Add New Campground
+        </a>
+    </div>
+
+    <ul class="campground-list">
+
+        <% campgrounds.forEach((camp) => { %>
+
+            <li class="campground-card">
+
+                <h2>
+                    <a href="/campground/<%= camp.id %>">
+                        <%= camp.title %>
+                    </a>
+                </h2>
+
+                <p>
+                    <%= camp.location %>
+                </p>
+
+                <a href="/campground/<%= camp.id %>">
+                    View Campground
+                </a>
+
+            </li>
+
+        <% }); %>
+
+    </ul>
+
+</section>

@@ -1,0 +1,112 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f5f5f5;
+    color: #222;
+}
+
+nav {
+    display: flex;
+    gap: 25px;
+    padding: 18px 40px;
+    background: #222;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+}
+
+main {
+    min-height: 80vh;
+    padding: 40px 20px;
+}
+
+footer {
+    padding: 20px;
+    text-align: center;
+    background: #222;
+    color: white;
+}
+
+.container {
+    max-width: 900px;
+    margin: auto;
+}
+
+.hero {
+    max-width: 700px;
+    margin: 100px auto;
+    text-align: center;
+}
+
+.hero h1 {
+    font-size: 45px;
+}
+
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.campground-list {
+    list-style: none;
+    padding: 0;
+}
+
+.campground-card {
+    background: white;
+    padding: 20px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+}
+
+.campground-card a {
+    text-decoration: none;
+}
+
+.campground-form {
+    max-width: 600px;
+    background: white;
+    padding: 25px;
+    border-radius: 8px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 7px;
+    font-weight: bold;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+}
+
+.btn,
+.delete-btn {
+    display: inline-block;
+    padding: 10px 16px;
+    border: none;
+    border-radius: 5px;
+    background: #222;
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.actions {
+    margin-top: 30px;
+}
