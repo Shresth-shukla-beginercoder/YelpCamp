@@ -1,13 +1,13 @@
 import { pool } from "../db/pool.js";
 
-export const createCampGround = async (title, location, description, price) => {
+export const createCampGround = async (title, location, description, price,image) => {
   const result = await pool.query(
     `
-        INSERT INTO camp (title,location,description,price)
-        VALUES ($1, $2,$3,$4)
+        INSERT INTO camp (title,location,description,price,image)
+        VALUES ($1, $2,$3,$4,$5)
         RETURNING *
         `,
-    [title, location, description, price],
+    [title, location, description, price,image],
   );
 
   return result.rows[0];
@@ -26,6 +26,7 @@ export const updatecampground = async (
   description,
   price,
   location,
+  image,
   id,
 ) => {
   const result = await pool.query(
@@ -34,11 +35,12 @@ export const updatecampground = async (
         SET title = $1,
             description = $2,
             price = $3,
-            location = $4
-        WHERE id = $5
+            location = $4,
+            image =$5
+        WHERE id = $6
         RETURNING *
         `,
-    [title, description, price, location, id],
+    [title, description, price, location,image, id],
   );
 
   return result.rows[0];

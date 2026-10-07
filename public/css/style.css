@@ -9,6 +9,11 @@ body {
     color: #222;
 }
 
+
+/* =========================
+   NAVBAR
+========================= */
+
 nav {
     display: flex;
     gap: 25px;
@@ -21,10 +26,24 @@ nav a {
     text-decoration: none;
 }
 
+nav a:hover {
+    text-decoration: underline;
+}
+
+
+/* =========================
+   MAIN
+========================= */
+
 main {
     min-height: 80vh;
     padding: 40px 20px;
 }
+
+
+/* =========================
+   FOOTER
+========================= */
 
 footer {
     padding: 20px;
@@ -33,10 +52,21 @@ footer {
     color: white;
 }
 
+
+/* =========================
+   CONTAINER
+========================= */
+
 .container {
-    max-width: 900px;
+    width: 90%;
+    max-width: 1200px;
     margin: auto;
 }
+
+
+/* =========================
+   HERO
+========================= */
 
 .hero {
     max-width: 700px;
@@ -48,6 +78,15 @@ footer {
     font-size: 45px;
 }
 
+.hero p {
+    line-height: 1.6;
+}
+
+
+/* =========================
+   PAGE HEADER
+========================= */
+
 .page-header {
     display: flex;
     justify-content: space-between;
@@ -55,27 +94,222 @@ footer {
     margin-bottom: 30px;
 }
 
+.page-header h1 {
+    margin: 0;
+}
+
+
+/* =========================
+   BUTTONS
+========================= */
+
+.btn,
+.delete-btn {
+    display: inline-block;
+    padding: 10px 16px;
+
+    border: none;
+    border-radius: 5px;
+
+    background: #222;
+    color: white;
+
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background: #444;
+}
+
+.delete-btn {
+    background: #b00020;
+}
+
+.delete-btn:hover {
+    background: #8b0018;
+}
+
+
+/* =========================
+   CAMPGROUND LIST
+========================= */
+
 .campground-list {
     list-style: none;
     padding: 0;
+    margin: 0;
+
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
 }
+
+
+/* =========================
+   CAMPGROUND CARD
+========================= */
 
 .campground-card {
     background: white;
-    padding: 20px;
-    margin-bottom: 15px;
-    border-radius: 8px;
+
+    padding: 0;
+    margin: 0;
+
+    border-radius: 10px;
+    overflow: hidden;
+
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
 }
 
-.campground-card a {
+.campground-card:hover {
+    transform: translateY(-4px);
+
+    box-shadow:
+        0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+
+/* =========================
+   CAMPGROUND IMAGE
+========================= */
+
+.campground-image {
+    width: 100%;
+    height: 220px;
+
+    display: block;
+
+    object-fit: cover;
+}
+
+
+/* =========================
+   CAMPGROUND CONTENT
+========================= */
+
+.campground-content {
+    padding: 20px;
+}
+
+
+/* =========================
+   CAMPGROUND TITLE
+========================= */
+
+.campground-content h2 {
+    margin-top: 0;
+    margin-bottom: 8px;
+}
+
+.campground-content h2 a {
+    color: #222;
     text-decoration: none;
 }
 
+.campground-content h2 a:hover {
+    text-decoration: underline;
+}
+
+
+/* =========================
+   LOCATION
+========================= */
+
+.location {
+    color: #666;
+    font-size: 14px;
+
+    margin-top: 0;
+    margin-bottom: 12px;
+}
+
+
+/* =========================
+   DESCRIPTION
+========================= */
+
+.description {
+    color: #555;
+
+    line-height: 1.5;
+
+    margin-bottom: 20px;
+
+    display: -webkit-box;
+    line-clamp: 3;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+
+    overflow: hidden;
+}
+
+
+/* =========================
+   CAMPGROUND BOTTOM
+========================= */
+
+.campground-bottom {
+    display: flex;
+
+    justify-content: space-between;
+    align-items: center;
+
+    gap: 10px;
+
+    margin-top: 20px;
+}
+
+
+/* =========================
+   PRICE
+========================= */
+
+.price {
+    font-size: 16px;
+}
+
+
+/* =========================
+   VIEW BUTTON
+========================= */
+
+.view-btn {
+    display: inline-block;
+
+    padding: 8px 14px;
+
+    background: #222;
+    color: white;
+
+    border-radius: 5px;
+
+    text-decoration: none;
+}
+
+.view-btn:hover {
+    background: #444;
+}
+
+
+/* =========================
+   FORMS
+========================= */
+
 .campground-form {
     max-width: 600px;
+
     background: white;
+
     padding: 25px;
+
     border-radius: 8px;
+
+    margin: auto;
 }
 
 .form-group {
@@ -84,29 +318,218 @@ footer {
 
 .form-group label {
     display: block;
+
     margin-bottom: 7px;
+
     font-weight: bold;
 }
 
 .form-group input,
 .form-group textarea {
     width: 100%;
+
     padding: 10px;
+
     font-size: 16px;
+
+    border: 1px solid #ccc;
+    border-radius: 5px;
 }
 
-.btn,
-.delete-btn {
-    display: inline-block;
-    padding: 10px 16px;
-    border: none;
-    border-radius: 5px;
-    background: #222;
-    color: white;
-    text-decoration: none;
-    cursor: pointer;
+.form-group textarea {
+    min-height: 120px;
+
+    resize: vertical;
 }
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+
+    border-color: #222;
+}
+
+
+/* =========================
+   ACTIONS
+========================= */
 
 .actions {
     margin-top: 30px;
+
+    display: flex;
+    gap: 10px;
 }
+
+
+/* =========================
+   SHOW PAGE
+========================= */
+
+.show-card {
+    max-width: 800px;
+
+    margin: auto;
+
+    background: white;
+
+    border-radius: 10px;
+
+    overflow: hidden;
+
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.show-image {
+    width: 100%;
+    height: 400px;
+
+    object-fit: cover;
+
+    display: block;
+}
+
+.show-content {
+    padding: 30px;
+}
+
+.show-content h1 {
+    margin-top: 0;
+}
+
+.show-description {
+    line-height: 1.7;
+
+    color: #555;
+}
+
+.show-price {
+    font-size: 20px;
+
+    font-weight: bold;
+}
+
+
+/* =========================
+   TABLET
+========================= */
+
+@media (max-width: 900px) {
+
+    .campground-list {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 600px) {
+
+    nav {
+        padding: 15px 20px;
+
+        gap: 15px;
+
+        flex-wrap: wrap;
+    }
+
+    main {
+        padding: 25px 15px;
+    }
+
+    .container {
+        width: 94%;
+    }
+
+    .hero {
+        margin: 60px auto;
+    }
+
+    .hero h1 {
+        font-size: 34px;
+    }
+
+    .page-header {
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 15px;
+    }
+
+    .campground-list {
+        grid-template-columns: 1fr;
+    }
+
+    .campground-image {
+        height: 230px;
+    }
+
+    .campground-bottom {
+        align-items: flex-start;
+    }
+
+    .campground-form {
+        padding: 20px;
+    }
+
+    .show-image {
+        height: 280px;
+    }
+
+    .show-content {
+        padding: 20px;
+    }
+
+    .actions {
+        flex-direction: column;
+    }
+
+}
+
+/* ---------- base field look ---------- */
+.form-group { margin-bottom: 1.25rem; }
+.form-group label { display: block; margin-bottom: .3rem; font-weight: 600; }
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: .65rem .85rem;
+  border: 2px solid #ced4da;
+  border-radius: .5rem;
+  background: #fff;
+  transition: border-color .25s, background-color .25s, box-shadow .25s;
+}
+.form-group textarea { resize: vertical; }
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: 0;
+  border-color: #0d6efd;
+  box-shadow: 0 0 0 .2rem rgba(13, 110, 253, .2);
+}
+
+/* file input button */
+.form-group input[type="file"] { padding: .5rem; cursor: pointer; }
+.form-group input[type="file"]::file-selector-button {
+  margin-right: .75rem; padding: .4rem .9rem;
+  border: 0; border-radius: .4rem;
+  background: #e9ecef; cursor: pointer;
+}
+
+/* ---------- message line under each box ---------- */
+.msg { display: block; min-height: 1.2rem; margin-top: .3rem; font-size: .85rem; color: #6c757d; }
+
+/* ---------- valid ---------- */
+.form-group.is-ok input,
+.form-group.is-ok textarea { border-color: #198754; background: #f0fbf4; }
+.form-group.is-ok .msg { color: #198754; }
+
+/* ---------- invalid ---------- */
+.form-group.is-bad input,
+.form-group.is-bad textarea { border-color: #dc3545; background: #fff5f5; }
+.form-group.is-bad .msg { color: #dc3545; }

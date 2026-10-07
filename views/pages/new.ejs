@@ -4,68 +4,42 @@
 
     <h1>Add New Campground</h1>
 
-    <form action="/campground" method="post" class="campground-form">
+    <form action="/campground" method="post" class="campground-form" enctype="multipart/form-data" novalidate>
 
         <div class="form-group">
             <label for="title">Title</label>
-
-            <input
-                type="text"
-                id="title"
-                name="title"
-                placeholder="Enter campground title"
-                required
-            >
+            <input type="text" id="title" name="title" placeholder="Enter campground title">
+            <small class="msg"></small>
         </div>
 
-        <div class="form-group">
-            <label for="location">Location</label>
-
-            <input
-                type="text"
-                id="location"
-                name="location"
-                placeholder="Enter location"
-                required
-            >
-        </div>
         <div class="form-group">
             <label for="description">Description</label>
-
-            <textarea
-                id="description"
-                name="description"
-                placeholder="Enter description"
-                required
-            ></textarea>
+            <textarea id="description" name="description" rows="6" placeholder="Enter description"></textarea>
+            <small class="msg"></small>
         </div>
+
         <div class="form-group">
             <label for="price">Price</label>
-
-            <input
-                type="number"
-                id="price"
-                name="price"
-                placeholder="Enter price"
-                required
-            >
+            <input type="number" id="price" name="price" placeholder="Enter price">
+            <small class="msg"></small>
         </div>
+
         <div class="form-group">
             <label for="location">Location</label>
-
-            <input
-                type="text"
-                id="location"
-                name="location"
-                placeholder="Enter location"
-                required
-            >
+            <input type="text" id="location" name="location" placeholder="Enter location">
+            <small class="msg"></small>
         </div>
 
-        <button type="submit" class="btn">
-            Add Campground
-        </button>
+        <div class="form-group">
+            <label for="image">Image</label>
+            <input type="file" id="image" name="image" accept="image/*">
+            <small class="msg"></small>
+        </div>
+
+        <button type="submit" class="btn">Add Campground</button>
 
     </form>
 
 </section>
+
+<script src="/js/validate.js"></script>

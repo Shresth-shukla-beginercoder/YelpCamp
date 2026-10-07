@@ -16,19 +16,44 @@
 
             <li class="campground-card">
 
-                <h2>
-                    <a href="/campground/<%= camp.id %>">
-                        <%= camp.title %>
-                    </a>
-                </h2>
+                <img
+                    src="<%= camp.image %>"
+                    alt="<%= camp.title %>"
+                    class="campground-image"
+                >
 
-                <p>
-                    <%= camp.location %>
-                </p>
+                <div class="campground-content">
 
-                <a href="/campground/<%= camp.id %>">
-                    View Campground
-                </a>
+                    <h2>
+                        <a href="/campground/<%= camp.id %>">
+                            <%= camp.title %>
+                        </a>
+                    </h2>
+
+                    <p class="location">
+                        📍 <%= camp.location %>
+                    </p>
+
+                    <p class="description">
+                        <%= camp.description %>
+                    </p>
+
+                    <div class="campground-bottom">
+
+                        <strong class="price">
+                            ₹<%= camp.price %> / night
+                        </strong>
+
+                        <a
+                            href="/campground/<%= camp.id %>"
+                            class="view-btn"
+                        >
+                            View
+                        </a>
+
+                    </div>
+
+                </div>
 
             </li>
 

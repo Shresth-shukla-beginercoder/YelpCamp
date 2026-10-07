@@ -4,68 +4,47 @@
 
     <h1>Update Campground</h1>
 
-    <form
-        action="/campground/<%= campground.id %>/edit"
-        method="post"
-        class="campground-form"
-    >
+    <form action="/campground/<%= campground.id %>/edit" method="post" class="campground-form" enctype="multipart/form-data" novalidate>
 
         <div class="form-group">
             <label for="title">Title</label>
-
-            <input
-                type="text"
-                name="title"
-                id="title"
-                placeholder="Enter title"
-                required
-                value="<%= campground.title %>"
-            >
+            <input type="text" id="title" name="title" placeholder="Enter title" value="<%= campground.title %>">
+            <small class="msg"></small>
         </div>
 
         <div class="form-group">
             <label for="description">Description</label>
-
-            <textarea
-                name="description"
-                id="description"
-                placeholder="Enter description"
-                required
-                cols="30"
-                rows="7"
-            ><%= campground.description %></textarea>
+            <textarea id="description" name="description" rows="7" placeholder="Enter description"><%= campground.description %></textarea>
+            <small class="msg"></small>
         </div>
 
         <div class="form-group">
             <label for="price">Price</label>
-
-            <input
-                type="number"
-                name="price"
-                id="price"
-                placeholder="Enter price"
-                required
-                value="<%= campground.price %>"
-            >
+            <input type="number" id="price" name="price" placeholder="Enter price" value="<%= campground.price %>">
+            <small class="msg"></small>
         </div>
 
         <div class="form-group">
             <label for="location">Location</label>
-
-            <input
-                type="text"
-                name="location"
-                id="location"
-                placeholder="Enter location"
-                required
-                value="<%= campground.location %>"
-            >
+            <input type="text" id="location" name="location" placeholder="Enter location" value="<%= campground.location %>">
+            <small class="msg"></small>
         </div>
 
-        <button type="submit" class="btn">
-            Update Campground
-        </button>
+        <div class="form-group">
+            <p>Current Image</p>
+            <img src="<%= campground.image %>" alt="<%= campground.title %>" width="250">
+        </div>
+
+        <div class="form-group">
+            <label for="image">Upload new Image</label>
+            <input type="file" id="image" name="image" accept="image/*" data-optional>
+            <small class="msg"></small>
+        </div>
+
+        <button type="submit" class="btn">Update Campground</button>
 
     </form>
 
 </section>
+
+<script src="/js/validate.js"></script>

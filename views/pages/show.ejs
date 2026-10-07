@@ -2,24 +2,34 @@
 
 <section class="container">
 
-    <div class="campground-details">
+    <div class="show-card">
 
-        <h1><%= campgrounds.title %></h1>
+        <img
+            src="<%= campgrounds.image %>"
+            alt="<%= campgrounds.title %>"
+            class="show-image"
+        >
 
-        <p>
-            <strong>Description:</strong>
-            <%= campgrounds.description %>
-        </p>
+        <div class="show-content">
 
-        <p>
-            <strong>Location:</strong>
-            <%= campgrounds.location %>
-        </p>
+            <h1>
+                <%= campgrounds.title %>
+            </h1>
 
-        <p>
-            <strong>Price:</strong>
-            ₹<%= campgrounds.price %>
-        </p>
+            <p class="location">
+                📍 <%= campgrounds.location %>
+            </p>
+
+            <p class="show-description">
+                <strong>Description:</strong>
+                <%= campgrounds.description %>
+            </p>
+
+            <p class="show-price">
+                ₹<%= campgrounds.price %> / night
+            </p>
+
+        </div>
 
     </div>
 
@@ -33,7 +43,10 @@
             Add New
         </a>
 
-        <a href="/campground/<%= campgrounds.id %>/edit" class="btn">
+        <a
+            href="/campground/<%= campgrounds.id %>/edit"
+            class="btn"
+        >
             Edit
         </a>
 
