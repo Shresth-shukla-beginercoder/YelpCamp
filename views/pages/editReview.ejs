@@ -1,0 +1,59 @@
+<% layout("layouts/boilerplate.ejs") %>
+
+<div class="edit-review-page">
+
+    <h1>Edit Review</h1>
+
+    <form
+        action="/reviews/<%= rev.id %>/edit"
+        method="POST"
+        class="edit-review-form"
+    >
+
+        <label for="rating">
+            Rating
+        </label>
+
+        <select
+            name="rating"
+            id="rating"
+            required
+        >
+            <option value="1" <%= rev.rating === 1 ? "selected" : "" %>>
+                1 Star
+            </option>
+
+            <option value="2" <%= rev.rating === 2 ? "selected" : "" %>>
+                2 Stars
+            </option>
+
+            <option value="3" <%= rev.rating === 3 ? "selected" : "" %>>
+                3 Stars
+            </option>
+
+            <option value="4" <%= rev.rating === 4 ? "selected" : "" %>>
+                4 Stars
+            </option>
+
+            <option value="5" <%= rev.rating === 5 ? "selected" : "" %>>
+                5 Stars
+            </option>
+        </select>
+
+        <label for="comment">
+            Comment
+        </label>
+
+        <textarea
+            name="comment"
+            id="comment"
+            required
+        ><%= rev.comment %></textarea>
+
+        <button type="submit">
+            Update Review
+        </button>
+
+    </form>
+
+</div>

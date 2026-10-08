@@ -52,7 +52,7 @@
 
         <form
             action="/campground/<%= campgrounds.id %>/delete"
-            method="get"
+            method="post"
             style="display: inline;"
         >
             <button type="submit" class="delete-btn">
@@ -62,4 +62,87 @@
 
     </div>
 
+
+    <form action="/campground/<%= campgrounds.id %>/reviews" method="POST">
+
+    <label for="rating">Rating</label>
+
+    <select name="rating" id="rating" required>
+        <option value="">Choose rating</option>
+        <option value="1">1 Star</option>
+        <option value="2">2 Stars</option>
+        <option value="3">3 Stars</option>
+        <option value="4">4 Stars</option>
+        <option value="5">5 Stars</option>
+    </select>
+
+    <label for="comment">Comment</label>
+
+    <textarea
+        name="comment"
+        id="comment"
+        placeholder="Write your review..."
+        required
+    ></textarea>
+
+    <button type="submit">Submit Review</button>
+
+</form>
+<div class="reviews-section">
+
+    <h2>Reviews</h2>
+
+    <% if (reviews.length === 0) { %>
+
+        <p>No reviews yet.</p>
+
+    <% } else { %>
+
+        <% reviews.forEach(review => { %>
+
+            <div class="review-card">
+
+                <h3>
+                    Rating: <%= review.rating %>/5
+                </h3>
+
+                <p>
+                    <%= review.comment %>
+                </p>
+
+                <% if (user && review.user_id === user.id) { %>
+
+                    <div class="review-actions">
+
+                        <a
+                            href="/reviews/<%= review.id %>/edit"
+                            class="review-edit-btn"
+                        >
+                            Edit
+                        </a>
+
+                        <form
+                            action="/reviews/<%= review.id %>/delete"
+                            method="POST"
+                        >
+                            <button
+                                type="submit"
+                                class="review-delete-btn"
+                            >
+                                Delete
+                            </button>
+                        </form>
+
+                    </div>
+
+                <% } %>
+
+            </div>
+
+        <% }) %>
+
+    <% } %>
+
+</div>
 </section>
+

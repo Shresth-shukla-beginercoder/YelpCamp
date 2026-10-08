@@ -533,3 +533,352 @@ footer {
 .form-group.is-bad input,
 .form-group.is-bad textarea { border-color: #dc3545; background: #fff5f5; }
 .form-group.is-bad .msg { color: #dc3545; }
+
+/* =========================
+   LOGIN PAGE
+========================= */
+
+.auth-page {
+    max-width: 420px;
+    margin: 60px auto;
+    padding: 30px;
+    background: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+.auth-page h1 {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.auth-form label {
+    font-weight: 600;
+    margin-bottom: -10px;
+}
+
+.auth-form input {
+    width: 100%;
+    padding: 11px 12px;
+    border: 1px solid #ccc;
+    border-radius: 7px;
+    font-size: 15px;
+    box-sizing: border-box;
+}
+
+.auth-form input:focus {
+    outline: none;
+    border-color: #333;
+}
+
+.auth-form button {
+    padding: 11px;
+    border: none;
+    border-radius: 7px;
+    background: #222;
+    color: white;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.auth-form button:hover {
+    background: #444;
+}
+
+.auth-page p {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.auth-page a {
+    color: #222;
+    font-weight: 600;
+}
+
+/* =========================
+   REVIEWS
+========================= */
+
+.reviews-section {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.reviews-section h2 {
+    margin-bottom: 20px;
+}
+
+.review-card {
+    position: relative;
+    padding: 20px;
+    margin-bottom: 18px;
+    background: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+}
+
+.review-card h3 {
+    margin: 0 0 10px;
+    font-size: 17px;
+}
+
+.review-card p {
+    margin: 0 0 15px;
+    line-height: 1.6;
+}
+
+.review-actions {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.review-edit-btn {
+    display: inline-block;
+    padding: 7px 14px;
+    border-radius: 6px;
+    background: #222;
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.review-edit-btn:hover {
+    background: #444;
+}
+
+.review-delete-btn {
+    padding: 7px 14px;
+    border: none;
+    border-radius: 6px;
+    background: #b00020;
+    color: white;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.review-delete-btn:hover {
+    background: #8b0019;
+}
+/* =========================
+   REVIEW SUBMIT FORM
+========================= */
+
+.container > form[action*="/reviews"] {
+    max-width: 800px;
+    margin: 35px auto;
+    padding: 25px;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.container > form[action*="/reviews"] label {
+    font-weight: 600;
+    margin-top: 5px;
+}
+
+.container > form[action*="/reviews"] select {
+    width: 100%;
+    padding: 11px 12px;
+    border: 1px solid #ccc;
+    border-radius: 7px;
+    background: white;
+    font-size: 15px;
+    cursor: pointer;
+    box-sizing: border-box;
+}
+
+.container > form[action*="/reviews"] select:focus {
+    outline: none;
+    border-color: #333;
+}
+
+.container > form[action*="/reviews"] textarea {
+    width: 100%;
+    min-height: 120px;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 7px;
+    font-family: inherit;
+    font-size: 15px;
+    resize: vertical;
+    box-sizing: border-box;
+}
+
+.container > form[action*="/reviews"] textarea:focus {
+    outline: none;
+    border-color: #333;
+}
+
+.container > form[action*="/reviews"] button {
+    align-self: flex-start;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 7px;
+    background: #222;
+    color: white;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.container > form[action*="/reviews"] button:hover {
+    background: #444;
+}
+
+
+/* =========================
+   REVIEW CARDS
+========================= */
+
+.reviews-section {
+    max-width: 800px;
+    margin: 40px auto;
+}
+
+.reviews-section h2 {
+    margin-bottom: 20px;
+}
+
+.review-card {
+    padding: 20px;
+    margin-bottom: 18px;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+}
+
+.review-card h3 {
+    margin: 0 0 10px;
+    font-size: 17px;
+}
+
+.review-card p {
+    margin: 0 0 15px;
+    line-height: 1.6;
+}
+
+.review-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.review-edit-btn {
+    display: inline-block;
+    padding: 7px 14px;
+    border-radius: 6px;
+    background: #222;
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.review-edit-btn:hover {
+    background: #444;
+}
+
+.review-delete-btn {
+    padding: 7px 14px;
+    border: none;
+    border-radius: 6px;
+    background: #b00020;
+    color: white;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.review-delete-btn:hover {
+    background: #8b0019;
+}
+/* =========================
+   EDIT REVIEW PAGE
+========================= */
+
+.edit-review-page {
+    max-width: 650px;
+    margin: 50px auto;
+    padding: 30px;
+}
+
+.edit-review-page h1 {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.edit-review-form {
+    width: 100%;
+    padding: 30px;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+
+    box-sizing: border-box;
+
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.edit-review-form label {
+    font-weight: 600;
+    margin-top: 5px;
+}
+
+.edit-review-form select {
+    width: 100%;
+    padding: 11px 12px;
+    border: 1px solid #ccc;
+    border-radius: 7px;
+    background: #fff;
+    font-size: 15px;
+    box-sizing: border-box;
+}
+
+.edit-review-form textarea {
+    width: 100%;
+    min-height: 150px;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 7px;
+    font-family: inherit;
+    font-size: 15px;
+    resize: vertical;
+    box-sizing: border-box;
+}
+
+.edit-review-form select:focus,
+.edit-review-form textarea:focus {
+    outline: none;
+    border-color: #333;
+}
+
+.edit-review-form button {
+    width: fit-content;
+    margin-top: 8px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 7px;
+    background: #222;
+    color: white;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.edit-review-form button:hover {
+    background: #444;
+}

@@ -1,5 +1,6 @@
 import fs from "fs";
 import { deleteCampground ,updatecampground ,getcampgroundsById,createCampGround,getAllcampgrounds} from "../models/taskModel.js"
+import { getReviewsByCampground } from "../models/reviewModel.js";
 
 
 export const showHome = (req, res) => {
@@ -26,12 +27,19 @@ export async function createCamp(req,res) {
 }
 
 
-export async function getcampById(req,res) {
-      const { id } = req.params;
+export async function getcampById(req, res) {
 
-  const campgrounds = await getcampgroundsById(id);
+    const { id } = req.params;
 
-  res.render("pages/show", { campgrounds });
+    const reviews = await getReviewsByCampground(id);
+
+    const campgrounds = await getcampgroundsById(id);
+
+    res.render("pages/show", {
+        campgrounds,
+        reviews,
+        user: req.user
+    });
 }
 
 export async function editcampById(req,res) {
