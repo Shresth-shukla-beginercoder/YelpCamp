@@ -23,7 +23,10 @@ export async function loginUsr(req, res) {
 
         // User does not exist
         if (!user) {
-            return res.status(401).send("Invalid email or password");
+            return res.status(401).render("pages/login", {
+                error: "Invalid email or password. Please check your credentials and try again.",
+                email: email
+            });
         }
 
         // Check password
@@ -34,7 +37,10 @@ export async function loginUsr(req, res) {
 
         // Wrong password
         if (!isMatch) {
-            return res.status(401).send("Invalid email or password");
+            return res.status(401).render("pages/login", {
+                error: "Invalid email or password. Please check your credentials and try again.",
+                email: email
+            });
         }
         req.session.userId = user.id;
         // Login successful
@@ -44,7 +50,10 @@ export async function loginUsr(req, res) {
 
         console.error(error);
 
-        res.status(500).send("Something went wrong");
+        res.status(500).render("pages/login", {
+            error: "Something went wrong. Please try again later.",
+            email: req.body.email || ""
+        });
 
     }
 }
