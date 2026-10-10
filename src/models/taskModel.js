@@ -1,17 +1,33 @@
 import { pool } from "../db/pool.js";
 
-export const createCampGround = async (title, location, description, price,image) => {
+
+export const createCampGround = async (
+  title,
+  location,
+  description,
+  price,
+  image,
+  userId
+) => {
   const result = await pool.query(
     `
-        INSERT INTO camp (title,location,description,price,image)
-        VALUES ($1, $2,$3,$4,$5)
-        RETURNING *
-        `,
-    [title, location, description, price,image],
+      INSERT INTO camp (
+        title,
+        location,
+        description,
+        price,
+        image,
+        user_id
+      )
+      VALUES ($1, $2, $3, $4, $5, $6)
+      RETURNING *
+    `,
+    [title, location, description, price, image, userId]
   );
 
   return result.rows[0];
 };
+
 
 export const getAllcampgrounds = async () => {
   const result = await pool.query(`SELECT * FROM camp ORDER BY id DESC`);
@@ -40,7 +56,7 @@ export const updatecampground = async (
         WHERE id = $6
         RETURNING *
         `,
-    [title, description, price, location,image, id],
+    [title, description, price, location,image, id]
   );
 
   return result.rows[0];

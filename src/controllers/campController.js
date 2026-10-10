@@ -17,28 +17,40 @@ export async function getAllcamp(req,res) {
 }
 
 
-export async function createCamp(req,res) {
-     const { title, location, description, price } = req.body;
-     const image =`/image/${req.file.filename}`;
+export async function createCamp(req, res) {
+  const { title, location, description, price } = req.body;
+  const image = `/image/${req.file.filename}`;
 
-  const campgrounds = await createCampGround(title, location, description, price,image);
+  const campgrounds = await createCampGround(
+    title,
+    location,
+    description,
+    price,
+    image,
+    req.user.id
+  );
 
   res.redirect(`/campground/${campgrounds.id}`);
 }
 
 
 export async function getcampById(req, res) {
-
     const { id } = req.params;
 
     const reviews = await getReviewsByCampground(id);
-
     const campgrounds = await getcampgroundsById(id);
+
+    if (!campgrounds) {
+        return res.status(404).send("Campground not found");
+    }
+
+    const error = req.query.error || null;
 
     res.render("pages/show", {
         campgrounds,
         reviews,
-        user: req.user
+        user: req.user,
+        error
     });
 }
 

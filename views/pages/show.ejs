@@ -1,3 +1,4 @@
+
 <% layout("layouts/boilerplate.ejs") %>
 
 <section class="container">
@@ -33,6 +34,13 @@
 
     </div>
 
+<% if (error === "duplicate-review") { %>
+    <div class="review-error">
+        You have already reviewed this campground.
+        You can only submit one review per campground.
+    </div>
+<% } %>
+
     <div class="actions">
 
         <a href="/campground" class="btn">
@@ -43,106 +51,125 @@
             Add New
         </a>
 
-        <a
-            href="/campground/<%= campgrounds.id %>/edit"
-            class="btn"
-        >
-            Edit
-        </a>
+        <% if (
+            user &&
+            (
+                user.is_admin === true ||
+                Number(campgrounds.user_id) === Number(user.id)
+            )
+        ) { %>
 
-        <form
-            action="/campground/<%= campgrounds.id %>/delete"
-            method="post"
-            style="display: inline;"
-        >
-            <button type="submit" class="delete-btn">
-                Delete
-            </button>
-        </form>
+            <a
+                href="/campground/<%= campgrounds.id %>/edit"
+                class="btn"
+            >
+                Edit
+            </a>
+
+            <form
+                action="/campground/<%= campgrounds.id %>/delete"
+                method="post"
+                style="display: inline;"
+            >
+                <button type="submit" class="delete-btn">
+                    Delete
+                </button>
+            </form>
+
+        <% } %>
 
     </div>
 
+    <form
+        action="/campground/<%= campgrounds.id %>/reviews"
+        method="POST"
+    >
 
-    <form action="/campground/<%= campgrounds.id %>/reviews" method="POST">
+        <label for="rating">Rating</label>
 
-    <label for="rating">Rating</label>
+        <select name="rating" id="rating" required>
+            <option value="">Choose rating</option>
+            <option value="1">1 Star</option>
+            <option value="2">2 Stars</option>
+            <option value="3">3 Stars</option>
+            <option value="4">4 Stars</option>
+            <option value="5">5 Stars</option>
+        </select>
 
-    <select name="rating" id="rating" required>
-        <option value="">Choose rating</option>
-        <option value="1">1 Star</option>
-        <option value="2">2 Stars</option>
-        <option value="3">3 Stars</option>
-        <option value="4">4 Stars</option>
-        <option value="5">5 Stars</option>
-    </select>
+        <label for="comment">Comment</label>
 
-    <label for="comment">Comment</label>
+        <textarea
+            name="comment"
+            id="comment"
+            placeholder="Write your review..."
+            required
+        ></textarea>
 
-    <textarea
-        name="comment"
-        id="comment"
-        placeholder="Write your review..."
-        required
-    ></textarea>
+        <button type="submit">Submit Review</button>
 
-    <button type="submit">Submit Review</button>
+    </form>
 
-</form>
-<div class="reviews-section">
+    <div class="reviews-section">
 
-    <h2>Reviews</h2>
+        <h2>Reviews</h2>
 
-    <% if (reviews.length === 0) { %>
+        <% if (reviews.length === 0) { %>
 
-        <p>No reviews yet.</p>
+            <p>No reviews yet.</p>
 
-    <% } else { %>
+        <% } else { %>
 
-        <% reviews.forEach(review => { %>
+            <% reviews.forEach(review => { %>
 
-            <div class="review-card">
+                <div class="review-card">
 
-                <h3>
-                    Rating: <%= review.rating %>/5
-                </h3>
+                    <h3>
+                        Rating: <%= review.rating %>/5
+                    </h3>
 
-                <p>
-                    <%= review.comment %>
-                </p>
+                    <p>
+                        <%= review.comment %>
+                    </p>
 
-                <% if (user && review.user_id === user.id) { %>
+                    <% if (
+                        user &&
+                        (
+                            Number(review.user_id) === Number(user.id) ||
+                            user.is_admin === true
+                        )
+                    ) { %>
 
-                    <div class="review-actions">
+                        <div class="review-actions">
 
-                        <a
-                            href="/reviews/<%= review.id %>/edit"
-                            class="review-edit-btn"
-                        >
-                            Edit
-                        </a>
-
-                        <form
-                            action="/reviews/<%= review.id %>/delete"
-                            method="POST"
-                        >
-                            <button
-                                type="submit"
-                                class="review-delete-btn"
+                            <a
+                                href="/reviews/<%= review.id %>/edit"
+                                class="review-edit-btn"
                             >
-                                Delete
-                            </button>
-                        </form>
+                                Edit
+                            </a>
 
-                    </div>
+                            <form
+                                action="/reviews/<%= review.id %>/delete"
+                                method="POST"
+                            >
+                                <button
+                                    type="submit"
+                                    class="review-delete-btn"
+                                >
+                                    Delete
+                                </button>
+                            </form>
 
-                <% } %>
+                        </div>
 
-            </div>
+                    <% } %>
 
-        <% }) %>
+                </div>
 
-    <% } %>
+            <% }) %>
 
-</div>
+        <% } %>
+
+    </div>
+
 </section>
-
