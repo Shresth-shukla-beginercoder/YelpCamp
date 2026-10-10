@@ -1,59 +1,58 @@
 <% layout("layouts/boilerplate.ejs") %>
 
-<div class="edit-review-page">
+<section class="container">
 
-    <h1>Edit Review</h1>
+    <div style="max-width: 700px; margin: 0 auto;">
+        <div style="margin-bottom: 2rem;">
+            <a href="/campground/<%= rev.campground_id %>" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 0.5rem;">
+                ← Back to Campground
+            </a>
+        </div>
 
-    <form
-        action="/reviews/<%= rev.id %>/edit"
-        method="POST"
-        class="edit-review-form"
-    >
+        <div style="margin-bottom: 2rem;">
+            <h1 style="font-size: 2.25rem; font-weight: 700; color: var(--color-text-primary); margin-bottom: 0.5rem;">
+                Edit Your Review
+            </h1>
+            <p style="color: var(--color-text-secondary); font-size: 1.0625rem;">
+                Update your thoughts and rating
+            </p>
+        </div>
 
-        <label for="rating">
-            Rating
-        </label>
-
-        <select
-            name="rating"
-            id="rating"
-            required
+        <form
+            action="/reviews/<%= rev.id %>/edit"
+            method="POST"
+            class="campground-form"
         >
-            <option value="1" <%= rev.rating === 1 ? "selected" : "" %>>
-                1 Star
-            </option>
+            <div class="form-group">
+                <label for="rating">Rating</label>
+                <select name="rating" id="rating" required>
+                    <option value="5" <%= rev.rating === 5 ? "selected" : "" %>>⭐⭐⭐⭐⭐ Excellent</option>
+                    <option value="4" <%= rev.rating === 4 ? "selected" : "" %>>⭐⭐⭐⭐ Very Good</option>
+                    <option value="3" <%= rev.rating === 3 ? "selected" : "" %>>⭐⭐⭐ Good</option>
+                    <option value="2" <%= rev.rating === 2 ? "selected" : "" %>>⭐⭐ Fair</option>
+                    <option value="1" <%= rev.rating === 1 ? "selected" : "" %>>⭐ Poor</option>
+                </select>
+            </div>
 
-            <option value="2" <%= rev.rating === 2 ? "selected" : "" %>>
-                2 Stars
-            </option>
+            <div class="form-group">
+                <label for="comment">Your Review</label>
+                <textarea
+                    name="comment"
+                    id="comment"
+                    rows="8"
+                    required
+                ><%= rev.comment %></textarea>
+            </div>
 
-            <option value="3" <%= rev.rating === 3 ? "selected" : "" %>>
-                3 Stars
-            </option>
+            <div style="display: flex; gap: 1rem;">
+                <button type="submit" class="btn btn-primary" style="flex: 1; padding: 1rem; font-size: 1rem;">
+                    Update Review
+                </button>
+                <a href="/campground/<%= rev.campground_id %>" class="btn btn-secondary" style="padding: 1rem 1.5rem; font-size: 1rem;">
+                    Cancel
+                </a>
+            </div>
+        </form>
+    </div>
 
-            <option value="4" <%= rev.rating === 4 ? "selected" : "" %>>
-                4 Stars
-            </option>
-
-            <option value="5" <%= rev.rating === 5 ? "selected" : "" %>>
-                5 Stars
-            </option>
-        </select>
-
-        <label for="comment">
-            Comment
-        </label>
-
-        <textarea
-            name="comment"
-            id="comment"
-            required
-        ><%= rev.comment %></textarea>
-
-        <button type="submit">
-            Update Review
-        </button>
-
-    </form>
-
-</div>
+</section>

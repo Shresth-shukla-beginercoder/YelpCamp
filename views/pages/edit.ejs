@@ -2,48 +2,102 @@
 
 <section class="container">
 
-    <h1>Update Campground</h1>
-
-    <form action="/campground/<%= campground.id %>/edit" method="post" class="campground-form" enctype="multipart/form-data" novalidate>
-
-        <div class="form-group">
-            <label for="title">Title</label>
-            <input type="text" id="title" name="title" placeholder="Enter title" value="<%= campground.title %>">
-            <small class="msg"></small>
+    <div style="max-width: 700px; margin: 0 auto;">
+        <div style="margin-bottom: 2rem;">
+            <a href="/campground/<%= campground.id %>" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 0.5rem;">
+                ← Back to Campground
+            </a>
         </div>
 
-        <div class="form-group">
-            <label for="description">Description</label>
-            <textarea id="description" name="description" rows="7" placeholder="Enter description"><%= campground.description %></textarea>
-            <small class="msg"></small>
+        <div style="margin-bottom: 2rem;">
+            <h1 style="font-size: 2.25rem; font-weight: 700; color: var(--color-text-primary); margin-bottom: 0.5rem;">
+                Edit Campground
+            </h1>
+            <p style="color: var(--color-text-secondary); font-size: 1.0625rem;">
+                Update the details for <%= campground.title %>
+            </p>
         </div>
 
-        <div class="form-group">
-            <label for="price">Price</label>
-            <input type="number" id="price" name="price" placeholder="Enter price" value="<%= campground.price %>">
-            <small class="msg"></small>
-        </div>
+        <form action="/campground/<%= campground.id %>/edit" method="POST" class="campground-form" enctype="multipart/form-data" novalidate>
 
-        <div class="form-group">
-            <label for="location">Location</label>
-            <input type="text" id="location" name="location" placeholder="Enter location" value="<%= campground.location %>">
-            <small class="msg"></small>
-        </div>
+            <div class="form-group">
+                <label for="title">Campground Name</label>
+                <input
+                    type="text"
+                    id="title"
+                    name="title"
+                    value="<%= campground.title %>"
+                    required
+                >
+                <small class="msg"></small>
+            </div>
 
-        <div class="form-group">
-            <p>Current Image</p>
-            <img src="<%= campground.image %>" alt="<%= campground.title %>" width="250">
-        </div>
+            <div class="form-group">
+                <label for="location">Location</label>
+                <input
+                    type="text"
+                    id="location"
+                    name="location"
+                    value="<%= campground.location %>"
+                    required
+                >
+                <small class="msg"></small>
+            </div>
 
-        <div class="form-group">
-            <label for="image">Upload new Image</label>
-            <input type="file" id="image" name="image" accept="image/*" data-optional>
-            <small class="msg"></small>
-        </div>
+            <div class="form-group">
+                <label for="price">Price per Night (₹)</label>
+                <input
+                    type="number"
+                    id="price"
+                    name="price"
+                    value="<%= campground.price %>"
+                    min="0"
+                    step="1"
+                    required
+                >
+                <small class="msg"></small>
+            </div>
 
-        <button type="submit" class="btn">Update Campground</button>
+            <div class="form-group">
+                <label for="description">Description</label>
+                <textarea
+                    id="description"
+                    name="description"
+                    rows="6"
+                    required
+                ><%= campground.description %></textarea>
+                <small class="msg"></small>
+            </div>
 
-    </form>
+            <div class="form-group">
+                <label for="image">Update Image (optional)</label>
+                <div style="margin-bottom: 1rem;">
+                    <img
+                        src="<%= campground.image %>"
+                        alt="Current campground image"
+                        style="width: 100%; max-height: 200px; object-fit: cover; border-radius: var(--radius-md); border: 1px solid var(--color-border);"
+                    >
+                </div>
+                <input
+                    type="file"
+                    id="image"
+                    name="image"
+                    accept="image/*"
+                >
+                <small class="msg">Leave empty to keep the current image</small>
+            </div>
+
+            <div style="display: flex; gap: 1rem;">
+                <button type="submit" class="btn btn-primary" style="flex: 1; padding: 1rem; font-size: 1rem;">
+                    Save Changes
+                </button>
+                <a href="/campground/<%= campground.id %>" class="btn btn-secondary" style="padding: 1rem 1.5rem; font-size: 1rem;">
+                    Cancel
+                </a>
+            </div>
+
+        </form>
+    </div>
 
 </section>
 

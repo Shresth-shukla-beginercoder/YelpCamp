@@ -2,7 +2,8 @@ import express from "express";
 
 import {
     createUsr,
-    loginUsr
+    loginUsr,
+    logoutUsr
 } from "../controllers/userController.js";
 
 const router = express.Router();
@@ -22,5 +23,8 @@ router.post("/register", createUsr);
 
 // LOGIN
 router.post("/login", loginUsr);
+
+// LOGOUT
+router.post("/logout", logoutUsr);
 
 export default router;

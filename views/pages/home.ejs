@@ -1,13 +1,72 @@
 <% layout("layouts/boilerplate.ejs") %>
 
 <section class="hero">
-    <h1>Welcome to YelpCamp</h1>
+    <div class="hero-content">
+        <h1>Find Your Next Great Escape</h1>
+        <p>Discover beautiful campgrounds across incredible destinations. Your perfect outdoor adventure starts here.</p>
 
-    <p>
-        Discover amazing campgrounds and find your next adventure.
-    </p>
+        <form action="/campground" method="GET" class="hero-search">
+            <input
+                type="text"
+                name="search"
+                placeholder="Search campgrounds by name or location..."
+                value="<%= typeof query !== 'undefined' && query.search ? query.search : '' %>"
+            >
+            <button type="submit">Search</button>
+        </form>
 
-    <a href="/campground" class="btn">
-        Explore Campgrounds
-    </a>
+        <a href="/campground" class="hero-cta">
+            Explore All Campgrounds →
+        </a>
+    </div>
+</section>
+
+<section class="container" style="padding-top: 4rem;">
+    <div style="text-align: center; max-width: 800px; margin: 0 auto 3rem;">
+        <h2 style="font-size: 2.25rem; font-weight: 700; margin-bottom: 1rem; color: var(--color-text-primary);">
+            Why Choose YelpCamp?
+        </h2>
+        <p style="font-size: 1.125rem; color: var(--color-text-secondary); line-height: 1.7;">
+            Whether you're looking for a peaceful lakeside retreat, a mountain adventure, or a forest hideaway,
+            YelpCamp helps you discover and share amazing camping experiences.
+        </p>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; margin-bottom: 3rem;">
+        <div style="text-align: center; padding: 2rem;">
+            <div style="font-size: 3rem; margin-bottom: 1rem;">🏕️</div>
+            <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 0.75rem; color: var(--color-text-primary);">
+                Discover Campgrounds
+            </h3>
+            <p style="color: var(--color-text-secondary); line-height: 1.6;">
+                Browse through a curated collection of campgrounds with detailed information and reviews.
+            </p>
+        </div>
+
+        <div style="text-align: center; padding: 2rem;">
+            <div style="font-size: 3rem; margin-bottom: 1rem;">⭐</div>
+            <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 0.75rem; color: var(--color-text-primary);">
+                Share Reviews
+            </h3>
+            <p style="color: var(--color-text-secondary); line-height: 1.6;">
+                Help fellow campers by sharing your experiences and reading authentic reviews.
+            </p>
+        </div>
+
+        <div style="text-align: center; padding: 2rem;">
+            <div style="font-size: 3rem; margin-bottom: 1rem;">🗺️</div>
+            <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 0.75rem; color: var(--color-text-primary);">
+                Find Your Adventure
+            </h3>
+            <p style="color: var(--color-text-secondary); line-height: 1.6;">
+                From forests to mountains to lakes, find the perfect spot for your next outdoor adventure.
+            </p>
+        </div>
+    </div>
+
+    <div style="text-align: center; padding: 3rem 0;">
+        <a href="/campground" class="btn btn-primary" style="font-size: 1.125rem; padding: 1rem 2.5rem;">
+            Start Exploring
+        </a>
+    </div>
 </section>

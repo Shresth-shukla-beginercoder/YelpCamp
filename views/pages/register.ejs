@@ -1,48 +1,50 @@
-
 <% layout("layouts/boilerplate.ejs") %>
-<div class="auth-page">
 
-    <h1>Register</h1>
+<div class="auth-page">
+    <h1>Create Account</h1>
 
     <form action="/register" method="POST" class="auth-form">
+        <div>
+            <label for="username">Username</label>
+            <input
+                type="text"
+                id="username"
+                name="username"
+                placeholder="Choose a username"
+                required
+                autocomplete="username"
+            >
+        </div>
 
-        <label for="username">Username</label>
+        <div>
+            <label for="email">Email Address</label>
+            <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="you@example.com"
+                required
+                autocomplete="email"
+            >
+        </div>
 
-        <input
-            type="text"
-            id="username"
-            name="username"
-            placeholder="Enter your username"
-            required
-        >
+        <div>
+            <label for="password">Password</label>
+            <input
+                type="password"
+                id="password"
+                name="password"
+                placeholder="Create a strong password"
+                required
+                autocomplete="new-password"
+            >
+        </div>
 
-        <label for="email">Email</label>
-
-        <input
-            type="email"
-            id="email"
-            name="email"
-            placeholder="Enter your email"
-            required
-        >
-
-        <label for="password">Password</label>
-
-        <input
-            type="password"
-            id="password"
-            name="password"
-            placeholder="Create a password"
-            required
-        >
-
-        <button type="submit">Register</button>
-
+        <button type="submit">Create Account</button>
     </form>
 
     <p>
         Already have an account?
-        <a href="/login">Login</a>
+        <a href="/login">Sign in</a>
     </p>
-
 </div>

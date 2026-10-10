@@ -48,3 +48,13 @@ export async function loginUsr(req, res) {
 
     }
 }
+
+export function logoutUsr(req, res, next) {
+    req.session.destroy((err) => {
+        if (err) {
+            return next(err);
+        }
+        res.clearCookie('connect.sid');
+        res.redirect('/login');
+    });
+}

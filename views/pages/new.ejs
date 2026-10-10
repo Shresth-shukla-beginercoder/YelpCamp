@@ -2,43 +2,92 @@
 
 <section class="container">
 
-    <h1>Add New Campground</h1>
-
-    <form action="/campground" method="post" class="campground-form" enctype="multipart/form-data" novalidate>
-
-        <div class="form-group">
-            <label for="title">Title</label>
-            <input type="text" id="title" name="title" placeholder="Enter campground title">
-            <small class="msg"></small>
+    <div style="max-width: 700px; margin: 0 auto;">
+        <div style="margin-bottom: 2rem;">
+            <a href="/campground" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 0.5rem;">
+                ← Back to Campgrounds
+            </a>
         </div>
 
-        <div class="form-group">
-            <label for="description">Description</label>
-            <textarea id="description" name="description" rows="6" placeholder="Enter description"></textarea>
-            <small class="msg"></small>
+        <div style="margin-bottom: 2rem;">
+            <h1 style="font-size: 2.25rem; font-weight: 700; color: var(--color-text-primary); margin-bottom: 0.5rem;">
+                Add New Campground
+            </h1>
+            <p style="color: var(--color-text-secondary); font-size: 1.0625rem;">
+                Share your favorite camping spot with the community
+            </p>
         </div>
 
-        <div class="form-group">
-            <label for="price">Price</label>
-            <input type="number" id="price" name="price" placeholder="Enter price">
-            <small class="msg"></small>
-        </div>
+        <form action="/campground" method="POST" class="campground-form" enctype="multipart/form-data" novalidate>
 
-        <div class="form-group">
-            <label for="location">Location</label>
-            <input type="text" id="location" name="location" placeholder="Enter location">
-            <small class="msg"></small>
-        </div>
+            <div class="form-group">
+                <label for="title">Campground Name</label>
+                <input
+                    type="text"
+                    id="title"
+                    name="title"
+                    placeholder="e.g., Sunset Valley Campground"
+                    required
+                >
+                <small class="msg"></small>
+            </div>
 
-        <div class="form-group">
-            <label for="image">Image</label>
-            <input type="file" id="image" name="image" accept="image/*">
-            <small class="msg"></small>
-        </div>
+            <div class="form-group">
+                <label for="location">Location</label>
+                <input
+                    type="text"
+                    id="location"
+                    name="location"
+                    placeholder="e.g., Yosemite National Park, California"
+                    required
+                >
+                <small class="msg"></small>
+            </div>
 
-        <button type="submit" class="btn">Add Campground</button>
+            <div class="form-group">
+                <label for="price">Price per Night (₹)</label>
+                <input
+                    type="number"
+                    id="price"
+                    name="price"
+                    placeholder="500"
+                    min="0"
+                    step="1"
+                    required
+                >
+                <small class="msg"></small>
+            </div>
 
-    </form>
+            <div class="form-group">
+                <label for="description">Description</label>
+                <textarea
+                    id="description"
+                    name="description"
+                    rows="6"
+                    placeholder="Describe what makes this campground special..."
+                    required
+                ></textarea>
+                <small class="msg"></small>
+            </div>
+
+            <div class="form-group">
+                <label for="image">Campground Image</label>
+                <input
+                    type="file"
+                    id="image"
+                    name="image"
+                    accept="image/*"
+                    required
+                >
+                <small class="msg"></small>
+            </div>
+
+            <button type="submit" class="btn btn-primary" style="width: 100%; padding: 1rem; font-size: 1rem;">
+                Add Campground
+            </button>
+
+        </form>
+    </div>
 
 </section>
 

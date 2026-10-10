@@ -3,62 +3,121 @@
 <section class="container">
 
     <div class="page-header">
-        <h1>All Campgrounds</h1>
-
-        <a href="/campground/new" class="btn">
-            Add New Campground
-        </a>
+        <h1>Explore Campgrounds</h1>
+        <a href="/campground/new" class="btn btn-primary">+ Add Campground</a>
     </div>
 
-    <ul class="campground-list">
-
-        <% campgrounds.forEach((camp) => { %>
-
-            <li class="campground-card">
-
-                <img
-                    src="<%= camp.image %>"
-                    alt="<%= camp.title %>"
-                    class="campground-image"
+    <!-- Filters and Search -->
+    <div class="filters-section">
+        <form action="/campground" method="GET">
+            <div class="search-bar">
+                <input
+                    type="text"
+                    name="search"
+                    placeholder="Search by campground name or location..."
+                    value="<%= typeof search !== 'undefined' ? search : '' %>"
                 >
+            </div>
 
-                <div class="campground-content">
-
-                    <h2>
-                        <a href="/campground/<%= camp.id %>">
-                            <%= camp.title %>
-                        </a>
-                    </h2>
-
-                    <p class="location">
-                        📍 <%= camp.location %>
-                    </p>
-
-                    <p class="description">
-                        <%= camp.description %>
-                    </p>
-
-                    <div class="campground-bottom">
-
-                        <strong class="price">
-                            ₹<%= camp.price %> / night
-                        </strong>
-
-                        <a
-                            href="/campground/<%= camp.id %>"
-                            class="view-btn"
-                        >
-                            View
-                        </a>
-
-                    </div>
-
+            <div class="filters-row">
+                <div class="filter-group">
+                    <label for="minPrice">Min Price (₹)</label>
+                    <input
+                        type="number"
+                        id="minPrice"
+                        name="minPrice"
+                        placeholder="Min"
+                        min="0"
+                        value="<%= typeof minPrice !== 'undefined' ? minPrice : '' %>"
+                    >
                 </div>
 
-            </li>
+                <div class="filter-group">
+                    <label for="maxPrice">Max Price (₹)</label>
+                    <input
+                        type="number"
+                        id="maxPrice"
+                        name="maxPrice"
+                        placeholder="Max"
+                        min="0"
+                        value="<%= typeof maxPrice !== 'undefined' ? maxPrice : '' %>"
+                    >
+                </div>
 
-        <% }); %>
+                <div class="filter-group">
+                    <label for="sort">Sort By</label>
+                    <select id="sort" name="sort">
+                        <option value="">Default</option>
+                        <option value="newest" <%= typeof sort !== 'undefined' && sort === 'newest' ? 'selected' : '' %>>Newest First</option>
+                        <option value="oldest" <%= typeof sort !== 'undefined' && sort === 'oldest' ? 'selected' : '' %>>Oldest First</option>
+                        <option value="price-low" <%= typeof sort !== 'undefined' && sort === 'price-low' ? 'selected' : '' %>>Price: Low to High</option>
+                        <option value="price-high" <%= typeof sort !== 'undefined' && sort === 'price-high' ? 'selected' : '' %>>Price: High to Low</option>
+                    </select>
+                </div>
 
-    </ul>
+                <div class="filter-actions">
+                    <button type="submit" class="btn btn-primary">Apply Filters</button>
+                    <a href="/campground" class="btn btn-secondary">Clear</a>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <!-- Results count -->
+    <% if (campgrounds && campgrounds.length > 0) { %>
+        <div style="margin-bottom: 1.5rem; color: var(--color-text-secondary); font-size: 0.9375rem;">
+            Found <%= campgrounds.length %> <%= campgrounds.length === 1 ? 'campground' : 'campgrounds' %>
+        </div>
+    <% } %>
+
+    <!-- Campground List -->
+    <% if (campgrounds && campgrounds.length > 0) { %>
+        <ul class="campground-list">
+            <% campgrounds.forEach((camp) => { %>
+                <li class="campground-card">
+                    <img
+                        src="<%= camp.image %>"
+                        alt="<%= camp.title %>"
+                        class="campground-image"
+                    >
+
+                    <div class="campground-content">
+                        <h2>
+                            <a href="/campground/<%= camp.id %>">
+                                <%= camp.title %>
+                            </a>
+                        </h2>
+
+                        <p class="location">
+                            📍 <%= camp.location %>
+                        </p>
+
+                        <p class="description">
+                            <%= camp.description %>
+                        </p>
+
+                        <div class="campground-bottom">
+                            <div>
+                                <div class="price">₹<%= camp.price %></div>
+                                <div class="price-label">per night</div>
+                            </div>
+
+                            <a href="/campground/<%= camp.id %>" class="view-btn">
+                                View Details
+                            </a>
+                        </div>
+                    </div>
+                </li>
+            <% }); %>
+        </ul>
+    <% } else { %>
+        <!-- Empty State -->
+        <div class="empty-state">
+            <div class="empty-state-icon">🏕️</div>
+            <h2>No campgrounds found</h2>
+            <p>Try adjusting your search or filters to find what you're looking for.</p>
+            <a href="/campground" class="btn btn-primary">View All Campgrounds</a>
+        </div>
+    <% } %>
 
 </section>

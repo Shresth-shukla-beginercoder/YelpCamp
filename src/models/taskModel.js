@@ -29,8 +29,47 @@ export const createCampGround = async (
 };
 
 
-export const getAllcampgrounds = async () => {
-  const result = await pool.query(`SELECT * FROM camp ORDER BY id DESC`);
+export const getAllcampgrounds = async (filters = {}) => {
+  const { search, minPrice, maxPrice, sort } = filters;
+
+  let query = `SELECT * FROM camp WHERE 1=1`;
+  const params = [];
+  let paramCount = 0;
+
+  // Search filter
+  if (search && search.trim()) {
+    paramCount++;
+    query += ` AND (LOWER(title) LIKE $${paramCount} OR LOWER(location) LIKE $${paramCount})`;
+    params.push(`%${search.toLowerCase()}%`);
+  }
+
+  // Price filters
+  if (minPrice !== undefined && minPrice !== null && minPrice !== '') {
+    paramCount++;
+    query += ` AND price >= $${paramCount}`;
+    params.push(Number(minPrice));
+  }
+
+  if (maxPrice !== undefined && maxPrice !== null && maxPrice !== '') {
+    paramCount++;
+    query += ` AND price <= $${paramCount}`;
+    params.push(Number(maxPrice));
+  }
+
+  // Sorting
+  if (sort === 'newest') {
+    query += ` ORDER BY id DESC`;
+  } else if (sort === 'oldest') {
+    query += ` ORDER BY id ASC`;
+  } else if (sort === 'price-low') {
+    query += ` ORDER BY price ASC`;
+  } else if (sort === 'price-high') {
+    query += ` ORDER BY price DESC`;
+  } else {
+    query += ` ORDER BY id DESC`;
+  }
+
+  const result = await pool.query(query, params);
   return result.rows;
 };
 export const getcampgroundsById = async (id) => {

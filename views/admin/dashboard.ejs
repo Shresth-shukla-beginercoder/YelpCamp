@@ -1,41 +1,41 @@
-
 <% layout("layouts/boilerplate.ejs") %>
 
-<div class="container mt-4">
-    <h1>Admin Dashboard</h1>
-    <p>Welcome, <%= user.username %>!</p>
+<div class="dashboard-container">
 
-    <hr>
- 
-    <h3>Website Statistics</h3>
+    <div class="dashboard-welcome">
+        <h1>Admin Dashboard</h1>
+        <p>Welcome back, <%= user.username %>! Here's your YelpCamp overview.</p>
+    </div>
 
-    <div class="row mt-3">
-        <div class="col-md-3 mb-3">
-            <div class="card p-3">
-                <h5>Total Users</h5>
-                <h2><%= stats.totalUsers %></h2>
-            </div>
+    <div class="stats-grid">
+        <div class="stat-card">
+            <div class="stat-icon">👥</div>
+            <h5>Total Users</h5>
+            <h2><%= stats.totalUsers %></h2>
         </div>
 
-        <div class="col-md-3 mb-3">
-            <div class="card p-3">
-                <h5>Total Campgrounds</h5>
-                <h2><%= stats.totalCampgrounds %></h2>
-            </div>
+        <div class="stat-card">
+            <div class="stat-icon">🏕️</div>
+            <h5>Total Campgrounds</h5>
+            <h2><%= stats.totalCampgrounds %></h2>
         </div>
 
-        <div class="col-md-3 mb-3">
-            <div class="card p-3">
-                <h5>Total Reviews</h5>
-                <h2><%= stats.totalReviews %></h2>
-            </div>
+        <div class="stat-card">
+            <div class="stat-icon">⭐</div>
+            <h5>Total Reviews</h5>
+            <h2><%= stats.totalReviews %></h2>
         </div>
 
-        <div class="col-md-3 mb-3">
-            <div class="card p-3">
-                <h5>Total Admins</h5>
-                <h2><%= stats.totalAdmins %></h2>
-            </div>
+        <div class="stat-card">
+            <div class="stat-icon">🔐</div>
+            <h5>Total Admins</h5>
+            <h2><%= stats.totalAdmins %></h2>
         </div>
     </div>
+
+    <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+        <a href="/campground" class="btn btn-primary">View All Campgrounds</a>
+        <a href="/campground/new" class="btn btn-outline">Add New Campground</a>
+    </div>
+
 </div>

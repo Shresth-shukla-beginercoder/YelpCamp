@@ -11,9 +11,13 @@ export const showNewCampgroundForm = (req, res) => {
     res.render("pages/new");
 };
 
-export async function getAllcamp(req,res) {
- const campgrounds = await getAllcampgrounds();
-  res.render("pages/index", { campgrounds });
+export async function getAllcamp(req, res) {
+    const { search, minPrice, maxPrice, sort } = req.query;
+    const campgrounds = await getAllcampgrounds({ search, minPrice, maxPrice, sort });
+    res.render("pages/index", {
+        campgrounds,
+        filters: { search, minPrice, maxPrice, sort }
+    });
 }
 
 

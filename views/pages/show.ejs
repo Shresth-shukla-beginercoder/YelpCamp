@@ -1,10 +1,8 @@
-
 <% layout("layouts/boilerplate.ejs") %>
 
 <section class="container">
 
     <div class="show-card">
-
         <img
             src="<%= campgrounds.image %>"
             alt="<%= campgrounds.title %>"
@@ -12,135 +10,111 @@
         >
 
         <div class="show-content">
-
-            <h1>
-                <%= campgrounds.title %>
-            </h1>
+            <h1><%= campgrounds.title %></h1>
 
             <p class="location">
                 📍 <%= campgrounds.location %>
             </p>
 
-            <p class="show-description">
-                <strong>Description:</strong>
+            <div class="show-description">
+                <strong style="color: var(--color-text-primary); display: block; margin-bottom: 0.5rem;">About this campground</strong>
                 <%= campgrounds.description %>
-            </p>
+            </div>
 
-            <p class="show-price">
-                ₹<%= campgrounds.price %> / night
-            </p>
-
+            <div class="show-price">
+                ₹<%= campgrounds.price %> <span style="font-size: 1.125rem; font-weight: 400; color: var(--color-text-secondary);">/ night</span>
+            </div>
         </div>
-
     </div>
 
-<% if (error === "duplicate-review") { %>
-    <div class="review-error">
-        You have already reviewed this campground.
-        You can only submit one review per campground.
-    </div>
-<% } %>
+    <!-- Duplicate Review Error -->
+    <% if (error === "duplicate-review") { %>
+        <div class="review-error">
+            ⚠️ You have already reviewed this campground. You can only submit one review per campground.
+        </div>
+    <% } %>
 
+    <!-- Actions -->
     <div class="actions">
+        <a href="/campground" class="btn btn-secondary">← All Campgrounds</a>
 
-        <a href="/campground" class="btn">
-            All Campgrounds
-        </a>
-
-        <a href="/campground/new" class="btn">
-            Add New
-        </a>
-
-        <% if (
-            user &&
-            (
-                user.is_admin === true ||
-                Number(campgrounds.user_id) === Number(user.id)
-            )
-        ) { %>
-
-            <a
-                href="/campground/<%= campgrounds.id %>/edit"
-                class="btn"
-            >
+        <% if (user && (user.is_admin === true || Number(campgrounds.user_id) === Number(user.id))) { %>
+            <a href="/campground/<%= campgrounds.id %>/edit" class="btn btn-primary">
                 Edit
             </a>
 
             <form
                 action="/campground/<%= campgrounds.id %>/delete"
-                method="post"
+                method="POST"
                 style="display: inline;"
             >
-                <button type="submit" class="delete-btn">
-                    Delete
-                </button>
+                <button type="submit" class="btn btn-danger">Delete</button>
             </form>
-
         <% } %>
-
     </div>
 
-    <form
-        action="/campground/<%= campgrounds.id %>/reviews"
-        method="POST"
-    >
+    <!-- Review Form -->
+    <% if (user) { %>
+        <div class="reviews-section">
+            <h2>Leave a Review</h2>
+            <form
+                action="/campground/<%= campgrounds.id %>/reviews"
+                method="POST"
+                class="review-form"
+            >
+                <div class="form-group">
+                    <label for="rating">Rating</label>
+                    <select name="rating" id="rating" required>
+                        <option value="">Choose a rating</option>
+                        <option value="5">⭐⭐⭐⭐⭐ Excellent</option>
+                        <option value="4">⭐⭐⭐⭐ Very Good</option>
+                        <option value="3">⭐⭐⭐ Good</option>
+                        <option value="2">⭐⭐ Fair</option>
+                        <option value="1">⭐ Poor</option>
+                    </select>
+                </div>
 
-        <label for="rating">Rating</label>
+                <div class="form-group">
+                    <label for="comment">Your Review</label>
+                    <textarea
+                        name="comment"
+                        id="comment"
+                        placeholder="Share your experience at this campground..."
+                        required
+                    ></textarea>
+                </div>
 
-        <select name="rating" id="rating" required>
-            <option value="">Choose rating</option>
-            <option value="1">1 Star</option>
-            <option value="2">2 Stars</option>
-            <option value="3">3 Stars</option>
-            <option value="4">4 Stars</option>
-            <option value="5">5 Stars</option>
-        </select>
+                <button type="submit" class="btn btn-primary">Submit Review</button>
+            </form>
+        </div>
+    <% } %>
 
-        <label for="comment">Comment</label>
-
-        <textarea
-            name="comment"
-            id="comment"
-            placeholder="Write your review..."
-            required
-        ></textarea>
-
-        <button type="submit">Submit Review</button>
-
-    </form>
-
+    <!-- Reviews List -->
     <div class="reviews-section">
-
-        <h2>Reviews</h2>
+        <h2>Reviews (<%= reviews.length %>)</h2>
 
         <% if (reviews.length === 0) { %>
-
-            <p>No reviews yet.</p>
-
+            <div style="background: var(--color-white); padding: 3rem; border-radius: var(--radius-xl); text-align: center; box-shadow: var(--shadow-sm);">
+                <div style="font-size: 3rem; margin-bottom: 1rem;">💬</div>
+                <h3 style="font-size: 1.25rem; font-weight: 600; color: var(--color-text-primary); margin-bottom: 0.5rem;">No reviews yet</h3>
+                <p style="color: var(--color-text-secondary);">Be the first to review this campground!</p>
+            </div>
         <% } else { %>
-
             <% reviews.forEach(review => { %>
-
                 <div class="review-card">
-
                     <h3>
-                        Rating: <%= review.rating %>/5
+                        <span class="review-rating">
+                            <% for(let i = 0; i < review.rating; i++) { %>⭐<% } %>
+                        </span>
+                        <span style="color: var(--color-text-secondary); font-weight: 400; font-size: 1rem;">
+                            (<%= review.rating %>/5)
+                        </span>
                     </h3>
 
-                    <p>
-                        <%= review.comment %>
-                    </p>
+                    <p><%= review.comment %></p>
 
-                    <% if (
-                        user &&
-                        (
-                            Number(review.user_id) === Number(user.id) ||
-                            user.is_admin === true
-                        )
-                    ) { %>
-
+                    <% if (user && (Number(review.user_id) === Number(user.id) || user.is_admin === true)) { %>
                         <div class="review-actions">
-
                             <a
                                 href="/reviews/<%= review.id %>/edit"
                                 class="review-edit-btn"
@@ -151,25 +125,17 @@
                             <form
                                 action="/reviews/<%= review.id %>/delete"
                                 method="POST"
+                                style="display: inline;"
                             >
-                                <button
-                                    type="submit"
-                                    class="review-delete-btn"
-                                >
+                                <button type="submit" class="review-delete-btn">
                                     Delete
                                 </button>
                             </form>
-
                         </div>
-
                     <% } %>
-
                 </div>
-
             <% }) %>
-
         <% } %>
-
     </div>
 
 </section>
