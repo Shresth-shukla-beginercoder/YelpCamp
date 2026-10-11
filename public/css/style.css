@@ -858,6 +858,41 @@ main {
     box-shadow: var(--shadow-md);
 }
 
+.password-field {
+    position: relative;
+    width: 100%;
+}
+
+.auth-form .password-field input {
+    padding-right: 3.5rem;
+}
+
+.auth-form .password-field .password-toggle,
+.auth-form .password-field .password-toggle:hover,
+.auth-form .password-field .password-toggle:focus {
+    position: absolute;
+    top: 50%;
+    right: 0.875rem;
+    width: 2rem;
+    height: 2rem;
+    margin: 0;
+    padding: 0;
+    transform: translateY(-50%);
+    display: grid;
+    place-items: center;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+    color: var(--color-text-muted);
+    cursor: pointer;
+    transition: none;
+}
+
+.auth-form .password-field .password-toggle:focus {
+    outline: none;
+}
+
 .auth-page p {
     text-align: center;
     margin-top: var(--space-xl);
