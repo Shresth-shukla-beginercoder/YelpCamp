@@ -81,9 +81,9 @@ if (form) {
                 return "Enter a price above 0";
             }
 
-            // Price cannot be greater than 1000
-            if (value > 1000) {
-                return "Max price is 1000";
+            // Price cannot be greater than 500000
+            if (value > 500000) {
+                return "Max price is 500000";
             }
 
             // No error
