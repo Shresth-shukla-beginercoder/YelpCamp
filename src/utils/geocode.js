@@ -33,9 +33,20 @@ const withOrigin = (origin) => {
 // response-body code/message (the body does not echo the key).
 // ---------------------------------------------------------------------
 
-const mapTilerKeySet = () => Boolean(process.env.MAPTILER_API_KEY);
-const requestOriginConfigured = () =>
-    Boolean(process.env.MAPTILER_REQUEST_ORIGIN);
+// Secret-free description of the deployed key value. It reveals only whether
+// the variable is set / non-empty and whether it has leading or trailing
+// whitespace - never the key itself, its length, a fingerprint, or the URL.
+const describeKey = (raw) => {
+    const defined = Object.prototype.hasOwnProperty.call(process.env, "MAPTILER_API_KEY");
+    const value = defined ? String(raw ?? "") : "";
+    const present = value !== "";
+
+    return {
+        envKeyDefined: defined,
+        keyPresent: present,
+        keyHasBoundaryWhitespace: present && value !== value.trim()
+    };
+};
 
 // MapTiler's error body is JSON like {"code": "...", "message": "..."} (or
 // nests it under "error"). Read it defensively; the key is NOT in the body.
@@ -121,9 +132,10 @@ export const geocodeLocation = async (location, { origin } = {}) => {
         const status = err?.res?.status;
         const body = err?.res ? await readMapTilerError(err.res) : null;
         const category = classifyError(err, status, body);
+        const kd = describeKey(process.env.MAPTILER_API_KEY);
 
         // Evidence for the Vercel logs. Nothing here is a secret: the key is
-        // only ever referenced as a present/absent boolean.
+        // referenced only as defined/non-empty and boundary-whitespace flags.
         console.error(
             [
                 "[MapTiler geocode] request failed",
@@ -132,9 +144,9 @@ export const geocodeLocation = async (location, { origin } = {}) => {
                 `maptilerCode=${body?.code ?? "n/a"}`,
                 `maptilerMessage=${body?.message ?? "n/a"}`,
                 `sentOrigin=${sentOrigin}`,
-                `originSource=${origin ? "per-request browser Origin/Referer" : "default (MAPTILER_REQUEST_ORIGIN or http://localhost:3000)"}`,
-                `MAPTILER_API_KEY present=${mapTilerKeySet()}`,
-                `MAPTILER_REQUEST_ORIGIN present=${requestOriginConfigured()}`
+                `envKeyDefined=${kd.envKeyDefined}`,
+                `MAPTILER_API_KEY present=${kd.keyPresent}`,
+                `keyHasBoundaryWhitespace=${kd.keyHasBoundaryWhitespace}`
             ].join(" | ")
         );
 
