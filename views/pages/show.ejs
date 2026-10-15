@@ -24,6 +24,16 @@
             <div class="show-price">
                 ₹<%= campgrounds.price %> <span style="font-size: 1.125rem; font-weight: 400; color: var(--color-text-secondary);">/ night</span>
             </div>
+
+            <!-- Where you'll be camping -->
+            <div class="show-map">
+                <h2 class="show-map-title">🗺️ Location</h2>
+
+                <div class="map-frame show-map-frame" id="map-frame">
+                    <div class="map-canvas" id="map"></div>
+                    <div class="map-skeleton" id="map-skeleton"></div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -139,3 +149,12 @@
     </div>
 
 </section>
+
+<%- "<script>" %>
+const maptilerApiKey = <%- JSON.stringify(maptilerApiKey) %>;
+const campgroundCoordinates = <%- mapCoordinates %>;
+const campgroundTitle = <%- mapTitle %>;
+const campgroundLocation = <%- mapLocation %>;
+<%- "</script>" %>
+
+<script src="/js/showPageMap.js"></script>

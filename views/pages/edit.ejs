@@ -20,6 +20,10 @@
 
         <form action="/campground/<%= campground.id %>/edit" method="POST" class="campground-form" enctype="multipart/form-data" novalidate>
 
+            <% if (typeof error !== "undefined" && error) { %>
+                <div class="review-error" style="margin: 0 0 var(--space-lg);">⚠️ <%= error %></div>
+            <% } %>
+
             <div class="form-group">
                 <label for="title">Campground Name</label>
                 <input

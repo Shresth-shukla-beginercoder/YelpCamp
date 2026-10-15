@@ -1,4 +1,5 @@
 import { pool } from "../db/pool.js";
+import { geocodeLocation } from "../utils/geocode.js";
 
 const campgrounds = [
     {
@@ -111,19 +112,27 @@ const seedDatabase = async () => {
 
         // Insert seed data
         for (const campground of campgrounds) {
+            // Geocode each location so the campground can be shown on the map.
+            const geoData = await geocodeLocation(campground.location);
+            const placeName = geoData.features[0].place_name;
+            const [longitude, latitude] = geoData.features[0].geometry.coordinates;
+
             await pool.query(
     `
-    INSERT INTO camp (title,description, price, location,image)
-    VALUES ($1, $2, $3, $4,$5)
+    INSERT INTO camp (title,description, price, location,image, latitude, longitude)
+    VALUES ($1, $2, $3, $4,$5, $6, $7)
     `,
     [
         campground.title,
         campground.description,
         campground.price,
-        campground.location,
-        campground.image
+        placeName,
+        campground.image,
+        latitude,
+        longitude
     ]
 );
+            console.log(`Geocoded "${campground.title}" -> ${placeName}`);
         }
 
         console.log("Database seeded successfully.");

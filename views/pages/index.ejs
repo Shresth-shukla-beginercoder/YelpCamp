@@ -2,6 +2,12 @@
 
 <section class="container">
 
+    <!-- Cluster map: every geocoded campground at a glance -->
+    <div class="map-frame index-map-frame" id="map-frame">
+        <div class="map-canvas" id="map"></div>
+        <div class="map-skeleton" id="map-skeleton"></div>
+    </div>
+
     <div class="page-header">
         <h1>Explore Campgrounds</h1>
         <a href="/campground/new" class="btn btn-primary">+ Add Campground</a>
@@ -121,3 +127,13 @@
     <% } %>
 
 </section>
+
+<%- "<script>" %>
+const maptilerApiKey = <%- JSON.stringify(maptilerApiKey) %>;
+const campgrounds = {
+    type: "FeatureCollection",
+    features: <%- mapFeatures %>
+};
+<%- "</script>" %>
+
+<script src="/js/clusterMap.js"></script>

@@ -20,6 +20,10 @@
 
         <form action="/campground" method="POST" class="campground-form" enctype="multipart/form-data" novalidate>
 
+            <% if (typeof error !== "undefined" && error) { %>
+                <div class="review-error" style="margin: 0 0 var(--space-lg);">⚠️ <%= error %></div>
+            <% } %>
+
             <div class="form-group">
                 <label for="title">Campground Name</label>
                 <input
@@ -27,6 +31,7 @@
                     id="title"
                     name="title"
                     placeholder="e.g., Sunset Valley Campground"
+                    value="<%= typeof values !== 'undefined' && values ? values.title : '' %>"
                     required
                 >
                 <small class="msg"></small>
@@ -39,6 +44,7 @@
                     id="location"
                     name="location"
                     placeholder="e.g., Yosemite National Park, California"
+                    value="<%= typeof values !== 'undefined' && values ? values.location : '' %>"
                     required
                 >
                 <small class="msg"></small>
@@ -53,6 +59,7 @@
                     placeholder="500"
                     min="0"
                     step="1"
+                    value="<%= typeof values !== 'undefined' && values ? values.price : '' %>"
                     required
                 >
                 <small class="msg"></small>
@@ -66,7 +73,7 @@
                     rows="6"
                     placeholder="Describe what makes this campground special..."
                     required
-                ></textarea>
+                ><%= typeof values !== 'undefined' && values ? values.description : '' %></textarea>
                 <small class="msg"></small>
             </div>
 

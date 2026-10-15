@@ -1,4 +1,5 @@
 import { pool } from "../db/pool.js";
+import { geocodeLocation } from "../utils/geocode.js";
 
 
 export const createCampGround = async (
@@ -7,8 +8,13 @@ export const createCampGround = async (
   description,
   price,
   image,
-  userId
+  userId,
+  { origin } = {}
 ) => {
+  const geoData = await geocodeLocation(location, { origin });
+  const placeName = geoData.features[0].place_name;
+  const [longitude, latitude] = geoData.features[0].geometry.coordinates;
+
   const result = await pool.query(
     `
       INSERT INTO camp (
@@ -17,12 +23,14 @@ export const createCampGround = async (
         description,
         price,
         image,
-        user_id
+        user_id,
+        latitude,
+        longitude
       )
-      VALUES ($1, $2, $3, $4, $5, $6)
+      VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
       RETURNING *
     `,
-    [title, location, description, price, image, userId]
+    [title, placeName, description, price, image, userId, latitude, longitude]
   );
 
   return result.rows[0];
@@ -83,7 +91,12 @@ export const updatecampground = async (
   location,
   image,
   id,
+  { origin } = {}
 ) => {
+  const geoData = await geocodeLocation(location, { origin });
+  const placeName = geoData.features[0].place_name;
+  const [longitude, latitude] = geoData.features[0].geometry.coordinates;
+
   const result = await pool.query(
     `
         UPDATE camp
@@ -91,11 +104,13 @@ export const updatecampground = async (
             description = $2,
             price = $3,
             location = $4,
-            image =$5
-        WHERE id = $6
+            image =$5,
+            latitude = $6,
+            longitude = $7
+        WHERE id = $8
         RETURNING *
         `,
-    [title, description, price, location,image, id]
+    [title, description, price, placeName, image, latitude, longitude, id]
   );
 
   return result.rows[0];
