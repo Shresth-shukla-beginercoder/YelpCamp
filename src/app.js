@@ -33,7 +33,7 @@ app.use(async (req, res, next) => {
 
         // A public service URL, not a secret. The Gemini key and the Express
         // service token never reach the browser.
-        res.locals.chatApiUrl = process.env.CHAT_API_URL || "http://localhost:8000";
+       res.locals.chatApiUrl = process.env.CHAT_API_URL || "https://yelpcamp-mcp-ai.onrender.com";
 
         next();
     } catch (error) {

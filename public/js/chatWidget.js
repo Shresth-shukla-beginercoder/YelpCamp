@@ -4,9 +4,11 @@
 (function () {
     "use strict";
 
-    var CHAT_API_URL = (window.YELPCAMP_CHAT_API || "http://localhost:8000").replace(/\/$/, "");
-    var ENDPOINT = CHAT_API_URL + "/chat";
-    var MAX_LEN = 2000;
+
+var CHAT_API_URL = (window.YELPCAMP_CHAT_API || "https://yelpcamp-mcp-ai.onrender.com").replace(/\/$/, "");
+var ENDPOINT = CHAT_API_URL + "/chat";
+var MAX_LEN = 2000;
+
 
     var launcher = document.getElementById("chatLauncher");
     var panel = document.getElementById("chatPanel");

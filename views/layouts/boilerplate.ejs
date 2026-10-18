@@ -134,7 +134,9 @@
 <script>
     // Non-secret: only the public FastAPI chat service URL is exposed to the
     // browser. The Gemini key and the Express service token stay server-side.
-    window.YELPCAMP_CHAT_API = <%- JSON.stringify(typeof chatApiUrl !== "undefined" ? chatApiUrl : "http://localhost:8000") %>;
+  
+window.YELPCAMP_CHAT_API = <%- JSON.stringify(typeof chatApiUrl !== "undefined" ? chatApiUrl : "https://yelpcamp-mcp-ai.onrender.com") %>;
+
 </script>
 
 <!-- Floating chat widget -->
