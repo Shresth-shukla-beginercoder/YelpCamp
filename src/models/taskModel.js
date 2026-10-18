@@ -38,7 +38,7 @@ export const createCampGround = async (
 
 
 export const getAllcampgrounds = async (filters = {}) => {
-  const { search, minPrice, maxPrice, sort } = filters;
+  const { search, location, minPrice, maxPrice, sort, limit } = filters;
 
   let query = `SELECT * FROM camp WHERE 1=1`;
   const params = [];
@@ -48,7 +48,14 @@ export const getAllcampgrounds = async (filters = {}) => {
   if (search && search.trim()) {
     paramCount++;
     query += ` AND (LOWER(title) LIKE $${paramCount} OR LOWER(location) LIKE $${paramCount})`;
-    params.push(`%${search.toLowerCase()}%`);
+    params.push(`%${search.trim().toLowerCase()}%`);
+  }
+
+  // Exact location filter (used by the read-only chat API)
+  if (location && location.trim()) {
+    paramCount++;
+    query += ` AND LOWER(location) = LOWER($${paramCount})`;
+    params.push(location.trim());
   }
 
   // Price filters
@@ -75,6 +82,14 @@ export const getAllcampgrounds = async (filters = {}) => {
     query += ` ORDER BY price DESC`;
   } else {
     query += ` ORDER BY id DESC`;
+  }
+
+  // Bounded result set (chat API caps the number of rows returned)
+  const limitNum = Number(limit);
+  if (Number.isFinite(limitNum) && limitNum > 0) {
+    paramCount++;
+    query += ` LIMIT $${paramCount}`;
+    params.push(Math.floor(limitNum));
   }
 
   const result = await pool.query(query, params);

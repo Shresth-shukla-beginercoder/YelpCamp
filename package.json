@@ -1,6 +1,6 @@
 {
   "name": "yelpcamp_project",
-  "version": "1.0.0",
+  "version": "7.0.0",
   "description": "",
   "main": "index.js",
   "directories": {
@@ -9,7 +9,8 @@
   "scripts": {
     "start": "node src/app.js",
     "dev": "node --watch src/app.js",
-    "seed": "node src/seed/seed.js"
+    "seed": "node src/seed/seed.js",
+    "test": "node --test tests/chatApi.test.js"
   },
   "keywords": [],
   "author": "",

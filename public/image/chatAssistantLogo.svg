@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-labelledby="yctaTitle">
+  <title id="yctaTitle">YelpCamp chat assistant logo — a golden tent between pine trees, mountains, and a small sun</title>
+  <defs>
+    <linearGradient id="yctaBadge" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#3f8f85"/>
+      <stop offset="1" stop-color="#2d5a47"/>
+    </linearGradient>
+    <clipPath id="yctaScene">
+      <circle cx="50" cy="50" r="38"/>
+    </clipPath>
+  </defs>
+
+  <!-- Premium badge: teal-to-forest ring with a slim gold edge -->
+  <circle cx="50" cy="50" r="48" fill="url(#yctaBadge)"/>
+  <circle cx="50" cy="50" r="48" fill="none" stroke="#e8b04b" stroke-width="2.5"/>
+
+  <!-- Scene -->
+  <g clip-path="url(#yctaScene)">
+    <circle cx="50" cy="50" r="38" fill="#fdf9ef"/>
+
+    <!-- Small sun with a soft glow -->
+    <circle cx="69" cy="30" r="7.5" fill="#f4c542" opacity="0.25"/>
+    <circle cx="69" cy="30" r="4.5" fill="#f4c542"/>
+
+    <!-- Mountain range (teal) with snow caps -->
+    <path d="M6 63 L30 32 L54 63 Z" fill="#6fa89e"/>
+    <path d="M30 32 L36.5 41.5 L33 38.5 L30 42 L27 38.5 L23.5 41.5 Z" fill="#ffffff"/>
+    <path d="M34 63 L56 40 L78 63 Z" fill="#578e81"/>
+    <path d="M56 40 L61 46.5 L58.5 44 L56 47 L53.5 44 L51 46.5 Z" fill="#ffffff" opacity="0.95"/>
+
+    <!-- Ground swell -->
+    <path d="M6 72 Q50 63 94 72 L94 92 L6 92 Z" fill="#2e6b57"/>
+
+    <!-- Pine trees: back pair (deeper green) + left cluster + right pine -->
+    <g fill="#1a3a2e">
+      <path d="M18 50 L22.5 59 L13.5 59 Z"/>
+      <path d="M18 55 L23.5 66 L12.5 66 Z"/>
+      <path d="M82 50 L86.5 59 L77.5 59 Z"/>
+      <path d="M82 55 L87.5 66 L76.5 66 Z"/>
+    </g>
+    <g fill="#3f8a6d">
+      <path d="M13 56 L18.5 66.5 L7.5 66.5 Z"/>
+      <path d="M87 56 L92.5 66.5 L81.5 66.5 Z"/>
+    </g>
+
+    <!-- Golden tent with ridge highlight and dark doorway -->
+    <path d="M50 36 L70 67 L50 67 Z" fill="#c08a3f"/>
+    <path d="M50 36 L30 67 L50 67 Z" fill="#f2c14e"/>
+    <path d="M50 36 L50 67 L41.5 67 Z" fill="#e2a93f"/>
+    <path d="M50 52 L58.5 67 L41.5 67 Z" fill="#17332a"/>
+    <path d="M50 36 L50 31.5" stroke="#f2c14e" stroke-width="1.5" stroke-linecap="round"/>
+    <path d="M50 31.5 L55 33.2 L50 34.9 Z" fill="#f2c14e"/>
+  </g>
+
+  <!-- Clean separation between scene and ring -->
+  <circle cx="50" cy="50" r="38" fill="none" stroke="#ffffff" stroke-width="2"/>
+</svg>
